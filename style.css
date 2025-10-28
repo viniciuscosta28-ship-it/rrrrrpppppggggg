@@ -1,0 +1,284 @@
+/* ===================================
+   RESET E ESTILOS GERAIS
+   =================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    background: linear-gradient(to bottom, #1a1a2e, #16213e);
+    font-family: 'Courier New', monospace;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* ===================================
+   CONTAINER PRINCIPAL DO JOGO
+   =================================== */
+
+#game-container {
+    max-width: 800px;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    border: 3px solid #4a90e2;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 30px rgba(74, 144, 226, 0.3);
+    backdrop-filter: blur(10px);
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===================================
+   TÍTULO DO JOGO
+   =================================== */
+
+h1 {
+    text-align: center;
+    color: #4a90e2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 0 0 20px 0;
+    font-size: 2em;
+    letter-spacing: 2px;
+}
+
+/* ===================================
+   MUNDO DO JOGO
+   =================================== */
+
+#game-world {
+    width: 100%;
+    height: 400px;
+    background: #2d4a2e;
+    border: 2px solid #5a8a5a;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* ===================================
+   PERSONAGEM DO JOGADOR
+   =================================== */
+
+#player {
+    width: 40px;
+    height: 40px;
+    background: #ff6b6b;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    position: absolute;
+    top: 180px;
+    left: 50px;
+    transition: all 0.1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* ===================================
+   INIMIGOS
+   =================================== */
+
+.enemy {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    z-index: 5;
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.5));
+    transition: all 0.1s ease;
+}
+
+/* ===================================
+   ITENS COLECIONÁVEIS
+   =================================== */
+
+[id^="item-"] {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.5));
+    animation: item-float 2s ease-in-out infinite;
+    z-index: 3;
+}
+
+@keyframes item-float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+[id^="item-"]::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: glow 2s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes glow {
+    0%, 100% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+}
+
+/* ===================================
+   PORTA DE SAÍDA
+   =================================== */
+
+#exit-door {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+    animation: door-pulse 1.5s ease-in-out infinite;
+    z-index: 3;
+}
+
+@keyframes door-pulse {
+    0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+    }
+    50% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 20px rgba(255, 215, 0, 1));
+    }
+}
+
+/* ===================================
+   PAINEL DE INFORMAÇÕES
+   =================================== */
+
+#info-panel {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    line-height: 1.8;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#info-panel p {
+    margin: 8px 0;
+    font-size: 14px;
+}
+
+#info-panel strong {
+    color: #4a90e2;
+    font-weight: bold;
+}
+
+#player-info {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 12px;
+    border-radius: 5px;
+    border-left: 4px solid #4a90e2;
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* ===================================
+   INVENTÁRIO
+   =================================== */
+
+#inventory-panel {
+    margin-top: 15px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 14px;
+}
+
+#inventory-panel strong {
+    color: #ffd700;
+}
+
+/* ===================================
+   ANIMAÇÃO DE ATAQUE
+   =================================== */
+
+@keyframes attack-pulse {
+    0% {
+        transform: scale(0.5);
+        opacity: 1;
+        border-width: 3px;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+        border-width: 1px;
+    }
+}
+
+/* ===================================
+   RESPONSIVIDADE PARA TABLETS
+   =================================== */
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    #game-container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    #game-world {
+        height: 300px;
+    }
+
+    #player, .enemy, [id^="item-"], #exit-door {
+        font-size: 24px;
+        width: 32px;
+        height: 32px;
+    }
+}
